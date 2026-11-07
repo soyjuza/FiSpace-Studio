@@ -1,6 +1,7 @@
 import { Header } from '@/components/client/Header'
 import { Loader } from '@/components/client/Loader'
 import { PageEffects } from '@/components/client/PageEffects'
+import { RobotAnimator } from '@/components/client/RobotAnimator'
 import { BackgroundCircles, Contact, Footer, Hero, Pricing, ProjectCta, VisualDirection } from '@/components/sections'
 import { getContent } from '@/lib/getContent'
 
@@ -22,6 +23,7 @@ export default async function HomePage() {
       <Contact content={content} />
       <Footer settings={content.settings} />
       <PageEffects />
+      <RobotAnimator />
     </>
   )
 }

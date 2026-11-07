@@ -2685,3 +2685,45 @@ footer p {
   height: auto;
   overflow: visible;
 }
+
+/* ---- Robots vivos (ver components/client/RobotAnimator.tsx) ----
+   --look-x / --look-y van de -1 a 1 y los pone el JS según el puntero.
+   --rb-s escala el movimiento al tamaño del viewBox de cada robot. */
+.robot-svg {
+  --look-x: 0;
+  --look-y: 0;
+  --rb-s: 1;
+}
+.robot-svg[data-robot='project'] { --rb-s: 2.6; }
+.robot-svg[data-robot='contact'] { --rb-s: 0.6; }
+
+.robot-svg .rb-head {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transform:
+    translate(calc(var(--look-x) * 4px * var(--rb-s)), calc(var(--look-y) * 3px * var(--rb-s)))
+    rotate(calc(var(--look-x) * 5deg));
+}
+.robot-svg .rb-face {
+  transform: translate(calc(var(--look-x) * 11px * var(--rb-s)), calc(var(--look-y) * 8px * var(--rb-s)));
+}
+.robot-svg .rb-eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.08s ease-in;
+}
+.robot-svg.rb-blinking .rb-eye {
+  transform: scaleY(0.1);
+}
+.robot-svg .rb-thrust {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  animation: rb-thrust 0.9s ease-in-out infinite alternate;
+}
+@keyframes rb-thrust {
+  from { opacity: 0.75; transform: scaleY(0.9); }
+  to { opacity: 1; transform: scaleY(1.08); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .robot-svg .rb-thrust { animation: none; }
+}
