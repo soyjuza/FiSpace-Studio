@@ -15,8 +15,8 @@ export const defaultSettings = {
     { label: 'TIKTOK', url: 'https://www.tiktok.com/@fisdamn?_r=1&_t=ZS-94dmX8bkCRx' },
   ],
   footerText: '© 2026 FiSpace Studio — Estrategia Visual de Alta Conversión',
-  creditName: 'zapatacode',
-  creditUrl: 'https://github.com/zapatacode',
+  creditName: 'soyjuza',
+  creditUrl: 'https://github.com/soyjuza',
 }
 
 export const defaultHome = {

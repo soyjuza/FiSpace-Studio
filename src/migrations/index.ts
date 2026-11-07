@@ -1,15 +1,21 @@
 import * as migration_20261107_210355_initial from './20261107_210355_initial';
 import * as migration_20261107_210500_seed_content from './20261107_210500_seed_content';
+import * as migration_20261107_233104_credito_soyjuza from './20261107_233104_credito_soyjuza';
 
 export const migrations = [
   {
     up: migration_20261107_210355_initial.up,
     down: migration_20261107_210355_initial.down,
-    name: '20261107_210355_initial'
+    name: '20261107_210355_initial',
   },
   {
     up: migration_20261107_210500_seed_content.up,
     down: migration_20261107_210500_seed_content.down,
-    name: '20261107_210500_seed_content'
+    name: '20261107_210500_seed_content',
+  },
+  {
+    up: migration_20261107_233104_credito_soyjuza.up,
+    down: migration_20261107_233104_credito_soyjuza.down,
+    name: '20261107_233104_credito_soyjuza'
   },
 ];
