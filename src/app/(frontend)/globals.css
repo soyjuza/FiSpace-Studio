@@ -76,7 +76,7 @@
 }
 
 .loader-brand {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), 'Inter', sans-serif;
   font-weight: 800;
   font-size: clamp(32px, 6vw, 58px);
   letter-spacing: -0.04em;
@@ -98,7 +98,7 @@
 }
 
 .loader-tagline {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 400;
   letter-spacing: 0.12em;
@@ -139,7 +139,7 @@
 }
 
 .loader-pct {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), 'Inter', sans-serif;
   font-size: 12px;
   font-weight: 600;
   color: rgba(235, 235, 235, 0.5);
@@ -309,7 +309,7 @@ html {
 
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: #000434;
   color: #EBEBEB;
   overflow-x: hidden;
@@ -586,7 +586,7 @@ nav a:hover {
 }
 
 .hero-btn-secundario{
-font-family: 'Inter';
+font-family: var(--font-inter), 'Inter';
 font-style: normal;
 font-weight: 300;
 font-size: 18px;
@@ -853,7 +853,7 @@ text-fill-color: transparent;
   text-align: center;
   font-size: clamp(36px, 6vw, 50px);
   font-weight: 700;
-  font-family: 'Inter';
+  font-family: var(--font-inter), 'Inter';
   font-style: normal;
   background: linear-gradient(180deg, #00EEFF, #FFFFFF 80%);
   -webkit-text-fill-color: transparent;
@@ -872,7 +872,7 @@ text-fill-color: transparent;
   max-width: 700px;
   font-style: normal;
   font-weight: 400;
-  font-family: 'Inter';
+  font-family: var(--font-inter), 'Inter';
   background: linear-gradient(90deg, #FFFFFF 41.83%, #00EEFF 88.94%);
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
@@ -1026,7 +1026,7 @@ text-fill-color: transparent;
 }
 
 .card-title {
-  font-family: 'Inter';
+  font-family: var(--font-inter), 'Inter';
   font-style: normal;
   font-weight: 700;
   font-size: clamp(18px, 1.6vw, 24px);
@@ -1042,7 +1042,7 @@ text-fill-color: transparent;
 
 
 .card-description {
-  font-family: 'Inter';
+  font-family: var(--font-inter), 'Inter';
   font-size: 12px;
   font-style: normal;
   font-weight: 300;
@@ -1071,7 +1071,7 @@ text-fill-color: transparent;
 
 .card-features li {
   font-size: 12px;
-  font-family: 'Inter';
+  font-family: var(--font-inter), 'Inter';
   font-style: normal;
   font-weight: 300;
   letter-spacing: -0.04em;
@@ -1094,7 +1094,7 @@ text-fill-color: transparent;
   transform: translateY(-50%);
   width: 18px;
   height: 18px;
-  background-image: url('../img/check.svg');
+  background-image: url('/img/check.svg');
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -1109,7 +1109,7 @@ text-fill-color: transparent;
   border-radius: 30px;
   text-align: center;
   text-decoration: none;
-  font-family: 'Inter';
+  font-family: var(--font-inter), 'Inter';
   font-style: normal;
   font-weight: 800;
   font-size: 18px;
@@ -1272,7 +1272,7 @@ a.cta-box-wrapper {
 .cta-box-label {
   background: #ffffff;
   color: #0a0a1a;
-  font-family: 'Inter';
+  font-family: var(--font-inter), 'Inter';
   font-style: normal;
   font-weight: 700;
   font-size: 17px;
@@ -1306,7 +1306,7 @@ a.cta-box-wrapper {
 
 
 .cta-box-text {
-  font-family: 'Inter';
+  font-family: var(--font-inter), 'Inter';
   font-style: normal;
   font-weight: 200;
   font-size: 18px;
@@ -1367,7 +1367,7 @@ a.cta-box-wrapper {
 }
 
 .contact-title {
-  font-family: 'Inter';
+  font-family: var(--font-inter), 'Inter';
   font-style: normal;
   font-weight: 700;
   font-size: clamp(36px, 7vw, 60px);
@@ -1379,7 +1379,7 @@ a.cta-box-wrapper {
 
 
 .contact-title .highlight {
-  font-family: 'Inter';
+  font-family: var(--font-inter), 'Inter';
   font-style: normal;
   font-weight: 700;
   font-size: inherit;
@@ -1391,7 +1391,7 @@ a.cta-box-wrapper {
 }
 
 .contact-subtitle{
-  font-family: 'Inter';
+  font-family: var(--font-inter), 'Inter';
   font-style: normal;
   font-weight: 100;
   font-size: 18px;
@@ -1405,7 +1405,7 @@ a.cta-box-wrapper {
 }
 
 .contact-description {
-  font-family: 'Inter';
+  font-family: var(--font-inter), 'Inter';
   font-style: normal;
   font-weight: 200;
   font-size: 20px;
@@ -1439,7 +1439,7 @@ a.cta-box-wrapper {
   padding: 5px 28px;
   border-radius: 30px;
   text-decoration: none;
-  font-family: 'Inter';
+  font-family: var(--font-inter), 'Inter';
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
@@ -1508,7 +1508,7 @@ a.cta-box-wrapper {
   padding: 9px 30px;
   border-radius: 30px;
   text-decoration: none;
-  font-family: 'Inter';
+  font-family: var(--font-inter), 'Inter';
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
@@ -1529,7 +1529,7 @@ a.cta-box-wrapper {
 }
 
 .social-text {
-  font-family: 'Inter', inherit;
+  font-family: var(--font-inter), 'Inter', inherit;
   font-style: normal;
   font-weight: 100;
   font-size: 20px;
@@ -2677,4 +2677,11 @@ footer p {
   line-height: 1.1;
   max-width: 130px;
 }
+}
+
+/* Robots SVG en línea (antes <img>): la altura sale del viewBox */
+.robot-svg {
+  display: block;
+  height: auto;
+  overflow: visible;
 }
