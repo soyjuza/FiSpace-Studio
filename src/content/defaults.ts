@@ -47,12 +47,12 @@ export const defaultHome = {
     formUrl: 'https://tally.so/r/81dj8P',
   },
   contact: {
-    title: 'Trabajo con un numero',
+    title: 'Trabajo con un número',
     titleHighlight: 'limitado de marcas',
     description:
-      'Solo colaboro activamente con 3 clientes al mismo tiempo.\nlo hago por enfoque.\nSi trabajamos juntos, me integro a tu sistema: analizo métricas, reviso rendimiento y\noptimizo de forma constante.',
+      'Solo colaboro activamente con 3 clientes al mismo tiempo.\nLo hago por enfoque.\nSi trabajamos juntos, me integro a tu sistema: analizo métricas, reviso rendimiento y\noptimizo de forma constante.',
     subtitle:
-      'Si buscas dirección visual real orientada a métricas\nEste es el siguiente paso.\nCuéntame qué estás construyendo, qué estás vendiendo y dónde estás perdiendo rendimiento.\nSi veo que puedo aportar impacto real, trabajamos.\nSi no, te lo diré con honestidad.',
+      'Si buscas dirección visual real orientada a métricas,\neste es el siguiente paso.\nCuéntame qué estás construyendo, qué estás vendiendo y dónde estás perdiendo rendimiento.\nSi veo que puedo aportar impacto real, trabajamos.\nSi no, te lo diré con honestidad.',
     whatsappLabel: 'Chat en WhatsApp',
     emailLabel: 'Enviar Email',
     socialText: '¿quieres saber más de mí?',
