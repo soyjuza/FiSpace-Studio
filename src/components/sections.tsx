@@ -5,19 +5,27 @@ import { Robot } from './robot/Robot'
 import type { SiteContent } from '@/lib/getContent'
 import { whatsappLink } from '@/lib/links'
 
-export function BackgroundCircles() {
-  return (
-    <div className="bg-circles">
-      {[1, 2, 3, 4, 5].map((n) => (
-        <div key={n} className={`circle circle-${n}`} />
-      ))}
-    </div>
-  )
+/** Fondo de todo lo que va debajo del hero (ver .flow-bg en globals.css). */
+export function PageFlowBackground() {
+  return <div className="flow-bg" aria-hidden="true" />
 }
 
 export function Hero({ hero }: { hero: SiteContent['home']['hero'] }) {
   return (
     <section className="hero">
+      {/* Fondo del hero según el concepto original: luces en las esquinas y una
+          línea oscura nítida que baja por la izquierda, pasa bajo el subtítulo,
+          sube detrás del robot y sale por abajo a la derecha. */}
+      <div className="hero-bg" aria-hidden="true">
+        <svg className="hero-band hero-band--desktop" viewBox="0 0 1600 900" preserveAspectRatio="none">
+          <path d="M51,-40 L51,150 C51,360 150,575 385,575 C600,575 700,420 950,330 C1180,250 1380,420 1440,615 C1480,740 1515,820 1515,980" />
+        </svg>
+        {/* Misma línea para pantalla parada (tablet y celular): baja por la
+            izquierda, cruza bajo los botones, pasa detrás del robot y sale abajo a la derecha */}
+        <svg className="hero-band hero-band--mobile" viewBox="0 0 400 1000" preserveAspectRatio="none">
+          <path d="M16,-40 L16,400 C16,540 100,590 210,605 C320,620 384,700 384,830 L384,1040" />
+        </svg>
+      </div>
       <div className="hero-content">
         <div className="hero-text">
           <h1 className="hola">

@@ -281,61 +281,117 @@ body {
   padding-top: 100px;
 }
 
-/* Círculos de fondo difuminados */
-.bg-circles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+/* Fondo debajo del hero: sigue el mismo lenguaje del hero (luces de color en
+   las esquinas sobre azul oscuro), sin línea. Arriba continúa las luces verde y
+   azul con las que termina el hero, así no hay corte. Las luces van siempre
+   pegadas a los bordes para no tapar el contenido. */
+.page-flow {
+  position: relative;
+  /* Tamaño de las luces verde y azul donde se unen el hero y el resto.
+     Las usan los dos fondos, así forman una sola mancha sin corte. */
+  --join-green: 28vw 340px;
+  --join-blue: 42vw 470px;
+}
+.flow-bg {
+  position: absolute;
+  inset: -4px 0 0; /* se monta 4px bajo el hero: evita una raya fina en la unión */
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+  background:
+    /* continuación de las esquinas de abajo del hero */
+    radial-gradient(var(--join-green) at 0% 0%, #47704e, rgba(71, 112, 78, 0) 100%),
+    radial-gradient(var(--join-blue) at 100% 0%, #1a2497, rgba(26, 36, 151, 0) 100%),
+    /* planes */
+    radial-gradient(34vw 560px at 0% 33%, rgba(105, 31, 108, 0.85), rgba(105, 31, 108, 0) 100%),
+    radial-gradient(30vw 480px at 100% 47%, rgba(12, 105, 112, 0.75), rgba(12, 105, 112, 0) 100%),
+    /* proyecto puntual */
+    radial-gradient(32vw 500px at 0% 66%, rgba(26, 36, 151, 0.85), rgba(26, 36, 151, 0) 100%),
+    /* contacto */
+    radial-gradient(30vw 460px at 100% 80%, rgba(105, 31, 108, 0.75), rgba(105, 31, 108, 0) 100%),
+    radial-gradient(28vw 420px at 0% 100%, #47704e, rgba(71, 112, 78, 0) 100%),
+    radial-gradient(40vw 480px at 100% 100%, #1a2497, rgba(26, 36, 151, 0) 100%),
+    linear-gradient(180deg, #000549 0%, #000324 45%, #000549 100%);
 }
 
-.circle {
+/* Tablet y celular: la página es angosta y alta, así que las luces se hacen
+   más anchas (si no, quedan como tiras pegadas al borde) y más suaves en el
+   medio para no competir con los textos. */
+@media (max-width: 1024px) {
+  .page-flow, .hero {
+    --join-green: 62vw 300px;
+    --join-blue: 78vw 360px;
+  }
+  .flow-bg {
+    background:
+      radial-gradient(var(--join-green) at 0% 0%, #47704e, rgba(71, 112, 78, 0) 100%),
+      radial-gradient(var(--join-blue) at 100% 0%, #1a2497, rgba(26, 36, 151, 0) 100%),
+      radial-gradient(70vw 420px at 0% 30%, rgba(105, 31, 108, 0.6), rgba(105, 31, 108, 0) 100%),
+      radial-gradient(65vw 380px at 100% 46%, rgba(12, 105, 112, 0.55), rgba(12, 105, 112, 0) 100%),
+      radial-gradient(70vw 400px at 0% 64%, rgba(26, 36, 151, 0.65), rgba(26, 36, 151, 0) 100%),
+      radial-gradient(65vw 380px at 100% 80%, rgba(105, 31, 108, 0.55), rgba(105, 31, 108, 0) 100%),
+      radial-gradient(62vw 320px at 0% 100%, #47704e, rgba(71, 112, 78, 0) 100%),
+      radial-gradient(78vw 380px at 100% 100%, #1a2497, rgba(26, 36, 151, 0) 100%),
+      linear-gradient(180deg, #000549 0%, #000324 45%, #000549 100%);
+  }
+}
+
+/* Fondo del hero — medido sobre la imagen de referencia (1600x900).
+   Va dentro del hero, así se mueve con la página como parte del diseño. */
+.hero-bg {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.4;
-  animation: float-slow 20s ease-in-out infinite;
+  top: -100px; /* cubre también la zona del header */
+  left: 0;
+  width: 100%;
+  height: calc(100% + 100px);
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(36% 55% at 0% 0%, #691f6c, rgba(105, 31, 108, 0) 100%),
+    radial-gradient(32% 42% at 100% 0%, #0c6970, rgba(12, 105, 112, 0) 100%),
+    radial-gradient(28% 45% at 0% 100%, #47704e, rgba(71, 112, 78, 0) 100%),
+    radial-gradient(42% 62% at 100% 100%, #1a2497, rgba(26, 36, 151, 0) 100%),
+    linear-gradient(180deg, #01010d 0%, #000324 30%, #000549 100%);
 }
 
-.circle-1 {
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, #1a0b3d 0%, transparent 70%);
-  top: -200px;
-  left: -100px;
-  animation-delay: 0s;
+/* La línea: color y grosor exactos de la referencia, borde nítido */
+.hero-band {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* la línea se desvanece al llegar al final del hero (las luces sí continúan abajo) */
+  -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+}
+.hero-band path {
+  fill: none;
+  stroke: #041028;
+  stroke-width: clamp(34px, 4.7vw, 76px);
+  vector-effect: non-scaling-stroke; /* el grosor no se deforma al estirar */
+  stroke-linecap: butt;
+}
+.hero-band--mobile { display: none; }
+
+/* Tablet y celular (el hero se apila): luces de esquina en proporción vertical
+   y una versión de la línea dibujada para pantalla parada. Las de abajo usan
+   el mismo tamaño que el inicio del fondo de abajo (--join-*), así empalman. */
+@media (max-width: 1024px) {
+  .hero-bg {
+    background:
+      radial-gradient(80vw 340px at 0% 0%, #691f6c, rgba(105, 31, 108, 0) 100%),
+      radial-gradient(70vw 300px at 100% 0%, #0c6970, rgba(12, 105, 112, 0) 100%),
+      radial-gradient(var(--join-green) at 0% 100%, #47704e, rgba(71, 112, 78, 0) 100%),
+      radial-gradient(var(--join-blue) at 100% 100%, #1a2497, rgba(26, 36, 151, 0) 100%),
+      linear-gradient(180deg, #01010d 0%, #000324 30%, #000549 100%);
+  }
+  .hero-band--desktop { display: none; }
+  .hero-band--mobile { display: block; }
+  .hero-band path { stroke-width: clamp(20px, 3.6vw, 30px); }
 }
 
-.circle-2 {
-  width: 800px;
-  height: 800px;
-  background: radial-gradient(circle, #DD44DD 0%, transparent 70%);
-  top: 20%;
-  right: -300px;
-  animation-delay: 5s;
-}
-
-.circle-3 {
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, #17E1E1 0%, transparent 70%);
-  bottom: -200px;
-  left: 10%;
-  animation-delay: 10s;
-}
-
-.circle-4 {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, #3D4CF5 0%, transparent 70%);
-  bottom: 30%;
-  right: 5%;
-  animation-delay: 15s;
-}
+.hero-content { position: relative; z-index: 1; }
 
 @keyframes float-slow {
   0%, 100% {
@@ -461,7 +517,8 @@ nav a:hover {
 /* Hero Section — auto-layout
    Todo se adapta solo: grid + clamp(). No hace falta tocar breakpoints. */
 .hero {
-  min-height: 80vh;
+  /* ocupa la primera pantalla completa (el header fijo mide ~100px) */
+  min-height: calc(100svh - 100px);
   display: flex;
   align-items: center;
   padding: clamp(30px, 6vw, 60px) 20px clamp(40px, 6vw, 60px);
@@ -508,6 +565,8 @@ nav a:hover {
 .hero-mascot {
   display: flex;
   justify-content: center;
+  /* separada del borde derecho en escritorio */
+  padding-right: clamp(0px, 7vw, 130px);
 }
 
 .mascot-container {
@@ -556,6 +615,7 @@ nav a:hover {
     text-align: center;
   }
   .hero-text p { margin-inline: auto; }
+  .hero-mascot { padding-right: 0; }
   .mascot-container { width: clamp(180px, 42vw, 270px); }
 }
 
@@ -1167,7 +1227,7 @@ text-fill-color: transparent;
 }
 
 .cta-wrapper {
-  max-width: 960px;
+  max-width: 800px;
   margin: 0 auto;
   position: relative;
   background: transparent;
@@ -1183,10 +1243,11 @@ text-fill-color: transparent;
 .cta-content {
   position: relative;
   z-index: 1;
-  max-width: 50%; /* el resto es del robot */
+  max-width: 46%; /* el resto es del robot */
 }
 
 .cta-title {
+  white-space: nowrap; /* "Buscas algo más" en una línea, como el diseño original */
   font-size: clamp(28px, 4.6vw, 52px);
   font-weight: 800;
   margin-bottom: 16px;
@@ -1200,6 +1261,7 @@ text-fill-color: transparent;
   color: rgba(163, 210, 255, 0.75);
   line-height: 1.6;
   text-wrap: pretty;
+  margin-bottom: clamp(16px, 2.5vw, 32px);
 }
 /* Los saltos de línea del panel se ignoran: el texto se acomoda solo al ancho */
 .cta-subtitle br { display: none; }

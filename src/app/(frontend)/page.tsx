@@ -2,7 +2,7 @@ import { Header } from '@/components/client/Header'
 import { Loader } from '@/components/client/Loader'
 import { PageEffects } from '@/components/client/PageEffects'
 import { RobotAnimator } from '@/components/client/RobotAnimator'
-import { BackgroundCircles, Contact, Footer, Hero, Pricing, ProjectCta, VisualDirection } from '@/components/sections'
+import { Contact, Footer, Hero, PageFlowBackground, Pricing, ProjectCta, VisualDirection } from '@/components/sections'
 import { getContent } from '@/lib/getContent'
 import { siteUrl } from '@/lib/site'
 
@@ -35,14 +35,16 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
       <Loader />
-      <BackgroundCircles />
       <Header email={content.settings.email} />
       <Hero hero={content.home.hero} />
-      <VisualDirection section={content.home.visualDirection} video={content.video} />
-      <Pricing content={content} />
-      <ProjectCta cta={content.home.projectCta} />
-      <Contact content={content} />
-      <Footer settings={content.settings} />
+      <div className="page-flow">
+        <PageFlowBackground />
+        <VisualDirection section={content.home.visualDirection} video={content.video} />
+        <Pricing content={content} />
+        <ProjectCta cta={content.home.projectCta} />
+        <Contact content={content} />
+        <Footer settings={content.settings} />
+      </div>
       <PageEffects />
       <RobotAnimator />
     </>
