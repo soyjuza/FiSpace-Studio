@@ -17,6 +17,7 @@
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap"
   },
   "dependencies": {
+    "@fontsource/inter": "5.2.8",
     "@payloadcms/db-postgres": "3.93.0",
     "@payloadcms/next": "3.93.0",
     "@payloadcms/richtext-lexical": "3.93.0",
