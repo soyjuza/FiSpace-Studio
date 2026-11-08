@@ -563,7 +563,6 @@ nav a:hover {
   .hero { min-height: auto; }
 }
 
-
 .hero-text h1 .highlight {
   background: linear-gradient(90deg, #3D4CF5, #DD44DD);
   -webkit-background-clip: text;
@@ -657,44 +656,6 @@ text-fill-color: transparent;
 
 /* CAPA 3: Manos SVG (encima de todo) */
 /*robot proyect 2*/
-.mascot2-container {
-  position: relative;
-  width: 420px;
-  height: 480px;
-}
-
-.project-mascot {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: -200px;
-}
-
-.robot2 {
-  position: absolute;
-  width: 450px;
-  width: 450px;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  object-fit: contain;
-  filter: drop-shadow(0 20px 50px rgba(221, 68, 221, 0.4));
-  margin-top: 200px;
-  margin-left: 220px;
-}
-.hand-layer-left2 {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  top: 0;
-  left: 0;
-  z-index: 3;
-  object-fit: contain;
-  pointer-events: none;
-  margin-top: 430px;
-  margin-left: 165px;
-  transition: transform 0.3s ease;
-}
 
 /* Visual Direction Section */
 .visual-direction {
@@ -1132,27 +1093,171 @@ text-fill-color: transparent;
     inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
-/* Project CTA Section */
+/* Project CTA — auto-layout
+   El robot, la mano y el cartel son un solo bloque (.cta-figure) con
+   proporción fija; las piezas van en % y el texto del cartel en cqw,
+   así todo escala junto sin descuadrarse. */
 .project-cta {
-  padding: 80px 100px;
-  margin-bottom: 150px;
+  padding: clamp(40px, 6vw, 80px) 20px;
   margin-top: 50px;
+  /* el robot asoma por debajo del recuadro: reservamos ese espacio */
+  margin-bottom: clamp(140px, 17vw, 210px);
 }
 
 .cta-wrapper {
-  max-width: 800px;
+  max-width: 960px;
   margin: 0 auto;
   position: relative;
   background: transparent;
   border-radius: 32px;
-  padding: 55px 50px 70px;
-  /* Borde difuminado con box-shadow multicapa */
+  padding: clamp(32px, 5vw, 55px) clamp(22px, 5vw, 50px) clamp(32px, 6vw, 70px);
   box-shadow:
     0 0 0 1.5px #3D4CF5,
     0 0 40px rgba(0, 200, 255, 0.25),
     0 0 80px rgba(61, 76, 245, 0.2),
     inset 0 0 60px rgba(0, 100, 255, 0.06);
 }
+
+.cta-content {
+  position: relative;
+  z-index: 1;
+  max-width: 50%; /* el resto es del robot */
+}
+
+.cta-title {
+  font-size: clamp(28px, 4.6vw, 52px);
+  font-weight: 800;
+  margin-bottom: 16px;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  color: #fff;
+}
+
+.cta-subtitle {
+  font-size: clamp(13px, 1.3vw, 15px);
+  color: rgba(163, 210, 255, 0.75);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+/* Los saltos de línea del panel se ignoran: el texto se acomoda solo al ancho */
+.cta-subtitle br { display: none; }
+
+/* Bloque robot + cartel (medidas tomadas del diseño original) */
+.cta-figure {
+  position: absolute;
+  right: -5%;
+  top: 4%;
+  width: 54%;
+  aspect-ratio: 499 / 513;
+  container-type: inline-size;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+.cta-figure:hover { transform: translateY(-6px); }
+
+.robot2 {
+  position: absolute;
+  left: 13.43%;
+  top: 0;
+  width: 86.57%;
+  z-index: 1;
+  filter: drop-shadow(0 20px 50px rgba(221, 68, 221, 0.4));
+}
+
+.hand-layer-left2 {
+  position: absolute;
+  left: 2.81%;
+  top: 43.08%;
+  width: 15.43%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.cta-sign {
+  position: absolute;
+  left: 0;
+  top: 52.44%;
+  width: 61.32%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.cta-box-label {
+  display: block;
+  width: 97%;
+  height: 14.4cqw;
+  background: #fff;
+  color: #0a0a1a;
+  font-weight: 700;
+  font-size: 3.27cqw;
+  line-height: 7.5cqw;
+  letter-spacing: -0.03em;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 100px;
+  margin-bottom: -8.65cqw; /* asoma solo la parte de arriba detrás del cajón */
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+.cta-box-label .estrella-icon {
+  width: 2em;
+  height: 2em;
+  margin: -0.3em 0 0 -0.7em;
+}
+
+.cta-box {
+  display: block;
+  width: 100%;
+  background: linear-gradient(180deg, #000868 0%, #050938 100%);
+  border-radius: 6.7cqw;
+  padding: 8.65cqw 3.46cqw 4.2cqw;
+  box-shadow: inset 0px 0px 45px rgba(0, 238, 255, 0.4);
+  position: relative;
+  z-index: 2;
+  transition: box-shadow 0.3s ease;
+}
+.cta-figure:hover .cta-box {
+  box-shadow: inset 0px 0px 45px rgba(0, 238, 255, 0.6), 0 15px 40px rgba(0, 238, 255, 0.25);
+}
+
+.cta-box-text {
+  display: block;
+  font-weight: 200;
+  font-size: 3.46cqw;
+  line-height: 1.5;
+  letter-spacing: -0.06em;
+  text-align: center;
+  background: linear-gradient(90deg, #FFFFFF 0%, #00EEFF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  padding-bottom: 0.3em;
+}
+
+/* Móvil: texto arriba y el robot debajo, sin taparse */
+@media (max-width: 640px) {
+  .project-cta { margin-bottom: clamp(90px, 30vw, 150px); }
+  .cta-content { max-width: none; }
+  .cta-figure {
+    position: relative;
+    right: auto;
+    top: auto;
+    width: min(100%, 380px);
+    margin: 24px auto calc(-1 * min(30vw, 130px));
+  }
+  /* cartel un poco más ancho y con letra más grande para que se lea en celular */
+  .cta-sign { width: 74%; }
+  .cta-box-label { font-size: 4.2cqw; height: 17cqw; line-height: 9.5cqw; margin-bottom: -10cqw; }
+  .cta-box { padding: 10cqw 4cqw 4.5cqw; }
+  .cta-box-text { font-size: 4.3cqw; letter-spacing: -0.04em; text-wrap: balance; }
+  .cta-box-text br { display: none; }
+}
+
 
 /* Línea de borde con gradiente visible */
 .cta-wrapper::before {
@@ -1169,21 +1274,6 @@ text-fill-color: transparent;
   pointer-events: none;
 }
 
-.cta-content {
-  text-align: left;
-  position: relative;
-  z-index: 1;
-}
-
-.cta-title {
-  font-size: clamp(32px, 5vw, 52px);
-  font-weight: 800;
-  margin-bottom: 16px;
-  line-height: 1.1;
-  letter-spacing: -0.04em;
-  color: #fff;
-}
-
 .cta-title .highlight {
   background: linear-gradient(90deg, #DD44DD, #3D4CF5);
   -webkit-background-clip: text;
@@ -1191,107 +1281,7 @@ text-fill-color: transparent;
   background-clip: text;
 }
 
-.cta-subtitle {
-  font-size: 15px;
-  color: rgba(163, 210, 255, 0.75);
-  margin-bottom: 40px;
-  line-height: 1.6;
-  max-width: 480px;
-}
-
 /* Cajón "describir proyecto" en esquina inferior derecha */
-a.cta-box-wrapper {
-  text-decoration: none;
-  color: inherit;
-  display: flex;
-}
-
-.cta-box-wrapper {
-  position: absolute;
-  bottom: -100px;
-  right: 20px;
-  width: 350px;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 100px;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.cta-box-wrapper:hover {
-  transform: translateY(-6px);
-}
-
-.cta-box-wrapper:hover .cta-box {
-  box-shadow: inset 0px 0px 45px rgba(0, 238, 255, 0.6), 0 15px 40px rgba(0, 238, 255, 0.25);
-}
-
-.cta-box-label {
-  background: #ffffff;
-  color: #0a0a1a;
-  font-family: var(--font-inter), 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 17px;
-  line-height: 39px;
-  letter-spacing: -0.03em;
-  padding: 9px 22px;
-  border-radius: 100px;
-  position: relative;
-  z-index: 1;
-  margin-bottom: -45px; /* asoma solo la parte superior detrás del cajón */
-  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-  white-space: nowrap;
-  padding-top: 0px;
-  width: 310px;
-  height: 75px;
-  text-align: center;
-  align-items: center;
-}
-
-.cta-box {
-  background: linear-gradient(180deg, #000868 0%, #050938 100%);
-  border: none;
-  border-radius: 35px;
-  padding: 45px 18px 22px;
-  width: 100%;
-  box-shadow: inset 0px 0px 45px rgba(0, 238, 255, 0.4);
-  position: relative;
-  z-index: 2;
-
-}
-
-.cta-box-text {
-  font-family: var(--font-inter), 'Inter';
-  font-style: normal;
-  font-weight: 200;
-  font-size: 18px;
-  text-align: center;
-  letter-spacing: -0.06em;
-  color: rgba(100, 180, 255, 0.9);
-  line-height: 1.5;
-  text-align: center;
-  background: linear-gradient(90deg, #FFFFFF 0%, #00EEFF 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  padding-top: 0px;
-  padding-bottom: 5px;
-}
-
-.cta-mascot {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.cta-mascot svg {
-  max-width: 300px;
-  filter: drop-shadow(0 10px 30px rgba(221, 68, 221, 0.3));
-  animation: float 6s ease-in-out infinite;
-}
 
 /* Contact Section */
 .contact {
@@ -1576,54 +1566,6 @@ footer p {
   .hero-buttons {
     justify-content: center;
   }
-
-  .cta-wrapper {
-    padding: 45px 35px 50px;
-  }
-
-  .cta-content {
-    text-align: left;
-  }
-
-  .cta-box-wrapper {
-    right: -40px;
-    width: 240px;
-    bottom: -60px;
-  }
-    .cta-box-text {
-  font-weight: 200;
-  font-size: 14px;
-  line-height: 1.1;
-  margin-top: -20px;
-}
-  .cta-subtitle {
-  font-size: 13px;
-  color: rgba(163, 210, 255, 0.75);
-  margin-bottom: 40px;
-  line-height: 1.6;
-  max-width: 480px;
-}
-  .robot2 {
-  position: absolute;
-  width: 300px;
-  margin-top: 300px;
-  margin-left: 270px;
-}
-.cta-box-label {
-  font-size: 14px;
-  line-height: 16px;
-  padding: 0px 22px;
-  margin-bottom: -55px;
-  width: 210px;
-  height: 75px;
-}
-.hand-layer-left2 {
-  position: absolute;
-  width: 45px;
-  height: 45px;
-  margin-top: 450px;
-  margin-left: 230px;
-}
 }
 
 @media (max-width: 768px) {
@@ -1744,72 +1686,6 @@ footer p {
   }
 
   /* CTA en móvil */
-  .project-cta {
-    padding: 40px 16px 160px;
-  }
-
-  .cta-wrapper {
-    padding: 35px 24px 35px;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    max-width: 600px;
-  }
-  .cta-box-wrapper {
-    right: -20px;
-    width: 200px;
-    bottom: -10px;
-    padding: 0;
-  }
-
-  .cta-box-label {
-  font-size: 14px;
-  line-height: 16px;
-  padding: 0px 22px;
-  margin-bottom: -55px;
-  width: 180px;
-  height: 75px;
-}
-
-.cta-box {
-  border: none;
-  border-radius: 25px;
-  padding: 25px 18px 22px;
-  width: 100%;
-  box-shadow: inset 0px 0px 45px rgba(0, 238, 255, 0.4);
-  position: relative;
-  z-index: 2;
-
-}
-.cta-box-text {
-    font-size: 13px;
-  }
-.mascot2-container {
-  position: relative;
-  width: 420px;
-  height: 480px;
-}
-
-.project-mascot {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: -200px;
-}
-
-.robot2 {
-  position: absolute;
-  width: 250px;
-  width: 250px;
-  margin-top: 330px;
-  margin-left: 280px;
-}
-  .hand-layer-left2 {
-    width: 40px;
-    height: 40px;
-    margin-top: 450px;
-    margin-left: 255px;
-  }
 
   
 
@@ -1845,90 +1721,7 @@ footer p {
   .pricing-card {
     padding: 28px 22px;
   }
-
-  .cta-title {
-    font-size: 26px;
-  }
-
-  .cta-box-wrapper {
-    right: 18px;
-    width: 210px;
-    bottom: -110px;
-  }
   /*pricing-robot*/
-    .project-cta {
-    padding: 40px 16px 160px;
-  }
-
-  .cta-wrapper {
-    padding: 35px 24px 35px;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    max-width: 600px;
-  }
-  .cta-box-wrapper {
-    right: -75px;
-    width: 200px;
-    bottom: -50px;
-    padding: 0;
-  }
-
-  .cta-box-label {
-  font-size: 14px;
-  line-height: 16px;
-  padding: 0px 22px;
-  margin-bottom: -55px;
-  width: 180px;
-  height: 75px;
-}
-
-.cta-box {
-  border: none;
-  border-radius: 25px;
-  padding: 25px 18px 22px;
-  width: 100%;
-  box-shadow: inset 0px 0px 45px rgba(0, 238, 255, 0.4);
-  position: relative;
-  z-index: 2;
-
-}
-.cta-box-text {
-    font-size: 13px;
-  }
-.mascot2-container {
-  position: relative;
-  width: 420px;
-  height: 480px;
-}
-
-.project-mascot {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: -200px;
-}
-
-.robot2 {
-  position: absolute;
-  width: 200px;
-  width: 200px;
-  margin-top: 360px;
-  margin-left: 280px;
-}
-  .hand-layer-left2 {
-    width: 40px;
-    height: 40px;
-    margin-top: 450px;
-    margin-left: 245px;
-  }
-.cta-subtitle {
-  font-size: 13px;
-  color: rgba(163, 210, 255, 0.75);
-  margin-bottom: 40px;
-  line-height: 1.1;
-  max-width: 230px;
-}
 
   .contact-content {
     padding: 30px 20px;
@@ -2241,12 +2034,6 @@ footer p {
   .contact-subtitle {
     line-height: 16px;
   }
-  .cta-subtitle {
-  color: rgba(163, 210, 255, 0.75);
-  margin-bottom: 40px;
-  line-height: 1.1;
-  max-width: 260px;
-}
 }
 @media (max-width: 334px) {
 .contact-description {
@@ -2255,13 +2042,6 @@ footer p {
 .contact-subtitle {
     line-height: 16px;
   }
-  .cta-subtitle {
-  font-size: 13px;
-  color: rgba(163, 210, 255, 0.75);
-  margin-bottom: 40px;
-  line-height: 1.1;
-  max-width: 130px;
-}
 }
 @media (max-width: 400px) {
   .logo {
@@ -2278,74 +2058,6 @@ footer p {
     margin-right: 4px;
   }
   /*pricing-robot*/
-    .project-cta {
-    padding: 40px 16px 160px;
-  }
-
-  .cta-wrapper {
-    padding: 35px 24px 35px;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    max-width: 600px;
-  }
-  .cta-box-wrapper {
-    right: -80px;
-    width: 200px;
-    bottom: -40px;
-    padding: 0;
-  }
-
-  .cta-box-label {
-  font-size: 9px;
-  line-height: 16px;
-  padding: 0px 22px;
-  margin-bottom: -50px;
-  width: 130px;
-  height: 65px;
-  font-weight: 900;
-}
-
-.cta-box {
-  border: none;
-  border-radius: 25px;
-  padding: 25px 18px 15px;
-  width: 100%;
-  box-shadow: inset 0px 0px 45px rgba(0, 238, 255, 0.4);
-  position: relative;
-  z-index: 2;
-  width: 140px;
-  height: 80px;
-}
-.cta-box-text {
-    font-size: 11px;
-  }
-.mascot2-container {
-  position: relative;
-  width: 420px;
-  height: 480px;
-}
-
-.project-mascot {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: -200px;
-}
-
-.robot2 {
-  position: absolute;
-  width: 160px;
-  width: 160px;
-  margin-top: 380px;
-  margin-left: 285px;
-}
-  .hand-layer-left2 {
-    width: 25px;
-    height: 25px;
-    margin-top: 465px;
-    margin-left: 265px;
-  }
   .estrella-visualdirection {
   --estrella-size: 28px; /* cambia este valor para ajustar el tamaño */
   width: var(--estrella-size);
@@ -2361,19 +2073,6 @@ footer p {
 }
 .contact-subtitle {
     line-height: 16px;
-  }
-  .cta-subtitle {
-  font-size: 13px;
-  color: rgba(163, 210, 255, 0.75);
-  margin-bottom: 40px;
-  line-height: 1.1;
-  max-width: 180px;
-  margin-top: 10px;
-}
-.cta-title {
-    font-size: 26px;
-    margin-top: -20px;
-    margin-bottom: 0px;
   }
   .estrella-icon {
   --estrella-size: 25px; /* cambia este valor para ajustar el tamaño */
@@ -2421,24 +2120,6 @@ footer p {
   margin-top: 20px;
 }
 }
-@media (max-width: 383px) {
-  .cta-subtitle {
-  font-size: 13px;
-  color: rgba(163, 210, 255, 0.75);
-  margin-bottom: 40px;
-  line-height: 1.1;
-  max-width: 178px;
-}
-}
-@media (max-width: 369px) {
-  .cta-subtitle {
-  font-size: 13px;
-  color: rgba(163, 210, 255, 0.75);
-  margin-bottom: 40px;
-  line-height: 1.1;
-  max-width: 160px;
-}
-}
 @media (max-width: 353px) {
 .contact-description {
   line-height: 16px;
@@ -2446,13 +2127,6 @@ footer p {
 .contact-subtitle {
     line-height: 16px;
   }
-  .cta-subtitle {
-  font-size: 13px;
-  color: rgba(163, 210, 255, 0.75);
-  margin-bottom: 40px;
-  line-height: 1.1;
-  max-width: 159px;
-}
 }
 
 @media (max-width: 334px) {
@@ -2462,13 +2136,6 @@ footer p {
 .contact-subtitle {
     line-height: 16px;
   }
-  .cta-subtitle {
-  font-size: 13px;
-  color: rgba(163, 210, 255, 0.75);
-  margin-bottom: 40px;
-  line-height: 1.1;
-  max-width: 130px;
-}
 }
 
 /* Robots SVG en línea (antes <img>): la altura sale del viewBox */

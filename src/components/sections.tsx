@@ -96,22 +96,18 @@ export function ProjectCta({ cta }: { cta: SiteContent['home']['projectCta'] }) 
           </p>
         </div>
 
-        <div className="cta-box-wrapper">
-          <div className="project-mascot">
-            <div className="mascot2-container">
-              <img src="/img/mano-izquierda2.svg" className="hand-layer-left2" alt="" />
-              <Robot variant="project" className="robot2" />
-            </div>
-          </div>
-          <a href={cta.formUrl} target="_blank" rel="noopener">
-            <div className="cta-box-label">
+        <div className="cta-figure">
+          <Robot variant="project" className="robot2" />
+          <img src="/img/mano-izquierda2.svg" className="hand-layer-left2" alt="" />
+          <a href={cta.formUrl} target="_blank" rel="noopener" className="cta-sign">
+            <span className="cta-box-label">
               {cta.boxLabel} <img src="/img/estrella-projet.svg" className="estrella-icon" alt="" />
-            </div>
-            <div className="cta-box">
-              <p className="cta-box-text">
+            </span>
+            <span className="cta-box">
+              <span className="cta-box-text">
                 <Multiline text={cta.boxText} />
-              </p>
-            </div>
+              </span>
+            </span>
           </a>
         </div>
       </div>
