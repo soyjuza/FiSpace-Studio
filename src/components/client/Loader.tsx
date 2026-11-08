@@ -2,9 +2,14 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-const MIN_TIME = 1600 // ms mínimo que se muestra el loader
+const MIN_TIME = 700 // ms mínimo que se muestra el loader (primera visita)
+const MIN_TIME_REPEAT = 150 // si ya lo vio en esta sesión (p. ej. al recargar)
+const MAX_WAIT = 2500 // nunca esperamos más que esto, aunque falte alguna imagen
 
-/** Pantalla de carga: avanza mientras cargan las imágenes y sale con animación. */
+/**
+ * Pantalla de carga: espera solo las imágenes del hero (lo primero que se ve)
+ * y sale con animación. Las de más abajo siguen cargando sin bloquear.
+ */
 export function Loader() {
   const [progress, setProgress] = useState(0)
   const [exiting, setExiting] = useState(false)
@@ -23,7 +28,13 @@ export function Loader() {
       if (!done) setProgress((p) => Math.max(p, fake))
     }, 80)
 
-    const images = Array.from(document.images)
+    let seen = false
+    try {
+      seen = sessionStorage.getItem('fispace-loader') === '1'
+      sessionStorage.setItem('fispace-loader', '1')
+    } catch {}
+
+    const images = Array.from(document.querySelectorAll<HTMLImageElement>('.hero img'))
     const imagesLoaded = new Promise<void>((resolve) => {
       if (!images.length) return resolve()
       let loaded = 0
@@ -42,12 +53,14 @@ export function Loader() {
     })
 
     let exitTimer: ReturnType<typeof setTimeout>
-    Promise.all([imagesLoaded, new Promise((r) => setTimeout(r, MIN_TIME))]).then(() => {
+    const capped = Promise.race([imagesLoaded, new Promise((r) => setTimeout(r, MAX_WAIT))])
+    const minTime = new Promise((r) => setTimeout(r, seen ? MIN_TIME_REPEAT : MIN_TIME))
+    Promise.all([capped, minTime]).then(() => {
       done = true
       clearInterval(fakeInterval)
       setProgress(100)
       // Pequeño delay para que se vea el 100% antes de salir
-      exitTimer = setTimeout(() => setExiting(true), 280)
+      exitTimer = setTimeout(() => setExiting(true), seen ? 0 : 200)
     })
 
     return () => {

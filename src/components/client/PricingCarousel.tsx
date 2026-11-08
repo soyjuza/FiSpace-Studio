@@ -6,9 +6,9 @@ import { whatsappLink, type PlanCard } from '@/lib/links'
 
 const Stars = () => (
   <>
-    <img src="/img/estrella-pricing.svg" className="estrella-pricing" alt="" />{' '}
-    <img src="/img/estrella-pricing2.svg" className="estrella-pricing2" alt="" />{' '}
-    <img src="/img/estrella-pricing3.svg" className="estrella-pricing3" alt="" />
+    <img src="/img/estrella-pricing.webp" className="estrella-pricing" alt="" />{' '}
+    <img src="/img/estrella-pricing.webp" className="estrella-pricing2" alt="" />{' '}
+    <img src="/img/estrella-pricing3.webp" className="estrella-pricing3" alt="" />
   </>
 )
 

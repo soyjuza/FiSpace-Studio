@@ -43,7 +43,7 @@ export function Hero({ hero }: { hero: SiteContent['home']['hero'] }) {
             <img src="/img/mano-izquierda.svg" className="hand-layer-right" alt="" />
             <Robot variant="hero" className="robot-layer" />
             <div className="logo-circle-layer">
-              <img src="/img/logo.png" className="pablo-img" alt="FiSpace Studio Logo" />
+              <img src="/img/logo.webp" className="pablo-img" alt="FiSpace Studio Logo" />
             </div>
           </div>
         </div>
@@ -101,7 +101,7 @@ export function ProjectCta({ cta }: { cta: SiteContent['home']['projectCta'] }) 
           <img src="/img/mano-izquierda2.svg" className="hand-layer-left2" alt="" />
           <a href={cta.formUrl} target="_blank" rel="noopener" className="cta-sign">
             <span className="cta-box-label">
-              {cta.boxLabel} <img src="/img/estrella-projet.svg" className="estrella-icon" alt="" />
+              {cta.boxLabel} <img src="/img/estrella-projet.webp" className="estrella-icon" alt="" />
             </span>
             <span className="cta-box">
               <span className="cta-box-text">
@@ -135,11 +135,11 @@ export function Contact({ content }: { content: SiteContent }) {
             <img src="/img/mano-izquierda3.svg" className="hand-layer-left3" alt="" />
             <Robot variant="contact" className="robot3" />
             <a target="_blank" rel="noopener" href={whatsappLink(settings.whatsappNumber)} className="btn-whatsapp">
-              <img src="/img/whatsapp-icon.svg" className="whatsapp-icon" alt="" /> {contact.whatsappLabel}
+              <img src="/img/whatsapp-icon.webp" className="whatsapp-icon" alt="" /> {contact.whatsappLabel}
             </a>
           </div>
           <a href={`mailto:${settings.email}`} className="btn-email">
-            <img src="/img/gmail.svg" className="email-icon" alt="" /> {contact.emailLabel}
+            <img src="/img/gmail.webp" className="email-icon" alt="" /> {contact.emailLabel}
           </a>
         </div>
         <p className="social-text">{contact.socialText}</p>

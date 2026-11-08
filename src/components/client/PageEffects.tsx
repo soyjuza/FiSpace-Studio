@@ -5,7 +5,9 @@ import { useEffect } from 'react'
 /**
  * Efectos globales de la página:
  * - Scroll suave en los enlaces internos (#seccion).
- * - "Reveal": los elementos con .reveal aparecen al entrar en pantalla bajando.
+ * - "Reveal": los elementos con .reveal aparecen al entrar en pantalla.
+ *   Bajando, con animación; subiendo (o al cargar a mitad de página), al instante,
+ *   para que nunca queden huecos vacíos.
  */
 export function PageEffects() {
   useEffect(() => {
@@ -19,24 +21,49 @@ export function PageEffects() {
     }
     document.addEventListener('click', onClick)
 
-    let lastY = window.scrollY
-    const onScroll = () => {
-      lastY = window.scrollY
+    const pending = new Set(document.querySelectorAll<HTMLElement>('.reveal'))
+
+    const reveal = (el: Element, instant: boolean) => {
+      if (instant) {
+        el.classList.add('reveal-instant')
+        requestAnimationFrame(() => requestAnimationFrame(() => el.classList.remove('reveal-instant')))
+      }
+      el.classList.add('visible')
+      pending.delete(el as HTMLElement)
+      observer.unobserve(el)
     }
+
+    let lastY = window.scrollY
     const observer = new IntersectionObserver(
       (entries) => {
-        const scrollingDown = window.scrollY >= lastY
+        const y = window.scrollY
+        const scrollingDown = y >= lastY
+        lastY = y
         entries.forEach((entry) => {
-          if (entry.isIntersecting && scrollingDown) {
-            entry.target.classList.add('visible')
-            observer.unobserve(entry.target)
-          }
+          if (entry.isIntersecting) reveal(entry.target, !scrollingDown)
         })
       },
       { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
     )
+    pending.forEach((el) => observer.observe(el))
+
+    // Lo que quedó por encima de la pantalla sin llegar a verse (scroll rápido,
+    // salto con un enlace o recarga a mitad de página) aparece sin animación.
+    let ticking = false
+    const revealSkipped = () => {
+      ticking = false
+      pending.forEach((el) => {
+        if (el.getBoundingClientRect().bottom < 0) reveal(el, true)
+      })
+    }
+    const onScroll = () => {
+      if (!ticking && pending.size) {
+        ticking = true
+        requestAnimationFrame(revealSkipped)
+      }
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el))
+    revealSkipped()
 
     return () => {
       document.removeEventListener('click', onClick)

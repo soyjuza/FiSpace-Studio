@@ -7,8 +7,8 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #page-loader.loader-exit {
@@ -1895,6 +1895,13 @@ footer p {
 .reveal.visible {
   opacity: 1;
   transform: translateY(0) scale(1);
+}
+
+/* Al subir (o si la página carga a mitad de scroll) aparecen sin animación,
+   para que nunca queden huecos vacíos. La clase se quita al instante. */
+.reveal-instant,
+.reveal-instant .pricing-card {
+  transition: none !important;
 }
 
 /* Delays escalonados para grupos de elementos */
