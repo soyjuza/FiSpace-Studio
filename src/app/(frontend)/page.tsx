@@ -14,18 +14,33 @@ export default async function HomePage() {
   const { settings } = content
 
   // Datos del negocio para Google (aparecen en búsquedas y ayudan al SEO)
+  const businessId = `${siteUrl}/#negocio`
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
-    name: 'FiSpace Studio',
-    url: siteUrl,
-    image: `${siteUrl}/opengraph-image`,
-    logo: `${siteUrl}/img/apple-icon.png`,
-    description:
-      'Estrategia visual de alta conversión: VSL, creativos para ads y sistemas de monetización post-venta.',
-    email: settings.email,
-    telephone: `+${settings.whatsappNumber}`,
-    sameAs: settings.socialLinks.map((s) => s.url),
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': `${siteUrl}/#sitio`,
+        url: siteUrl,
+        name: 'FiSpace Studio',
+        inLanguage: 'es',
+        publisher: { '@id': businessId },
+      },
+      {
+        '@type': 'ProfessionalService',
+        '@id': businessId,
+        name: 'FiSpace Studio',
+        url: siteUrl,
+        image: `${siteUrl}/opengraph-image`,
+        logo: `${siteUrl}/img/apple-icon.png`,
+        description:
+          'Estrategia visual de alta conversión: VSL, creativos para ads y sistemas de monetización post-venta.',
+        email: settings.email,
+        telephone: `+${settings.whatsappNumber}`,
+        // Links limpios (sin parámetros de rastreo como ?igsh=) para que Google reconozca el perfil
+        sameAs: settings.socialLinks.map((s) => s.url.split('?')[0]),
+      },
+    ],
   }
 
   return (

@@ -32,6 +32,10 @@ export const metadata: Metadata = {
     description,
   },
   twitter: { card: 'summary_large_image', title, description },
+  // Código que da Google Search Console al verificar el sitio (solo se pone si existe la variable)
+  ...(process.env.GOOGLE_SITE_VERIFICATION && {
+    verification: { google: process.env.GOOGLE_SITE_VERIFICATION },
+  }),
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
